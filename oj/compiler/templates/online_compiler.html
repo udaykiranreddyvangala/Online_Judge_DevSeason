@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUF Style Online Compiler</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #1e1e1e;
+            color: white;
+            margin: 0;
+            overflow: hidden;
+        }
+        .editor-container {
+            height: calc(100vh - 60px);
+        }
+        #editor {
+            height: 100%;
+            width: 100%;
+        }
+        .output-container {
+            height: calc(100vh - 60px);
+            background: #252526;
+            padding: 10px;
+            overflow: auto;
+        }
+        .topbar {
+            background: #333;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="topbar d-flex justify-content-between align-items-center">
+    <div class="d-flex gap-2">
+        <button class="btn btn-secondary btn-sm">C++</button>
+        <button class="btn btn-secondary btn-sm">File</button>
+        <button class="btn btn-danger btn-sm" onclick="runCode()">Run</button>
+    </div>
+    <div class="text-white">Made with ❤️ by TUF</div>
+</div>
+
+<div class="row g-0">
+    <div class="col-md-8 editor-container">
+        <div id="editor">// Write your code here...</div>
+    </div>
+    <div class="col-md-4 output-container">
+        <h5>Input</h5>
+        <textarea id="input" class="form-control bg-dark text-white mb-2" rows="4"></textarea>
+        <h5>Output</h5>
+        <pre id="output" class="bg-dark text-success p-2">Your output here...</pre>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0/min/vs/loader.min.js"></script>
+
+<script>
+    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0/min/vs' } });
+    let editor;
+    require(['vs/editor/editor.main'], function () {
+        editor = monaco.editor.create(document.getElementById('editor'), {
+            value: '#include<bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    cout << "Hello World!";\n    return 0;\n}',
+            language: 'cpp',
+            theme: 'vs-dark'
+        });
+    });
+
+    function runCode() {
+        const code = editor.getValue();
+        const input = document.getElementById("input").value;
+
+        // Placeholder response
+        document.getElementById("output").textContent = "Simulated output:\n" + code.substring(0, 50) + "...";
+    }
+</script>
+
+</body>
+</html>

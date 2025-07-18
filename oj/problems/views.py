@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import problem
+from compiler.views import submit
 # Create your views here.
 
 def main(request):
@@ -27,3 +28,5 @@ def problem_details(request,id):
 def contest(request):
     template=loader.get_template('contest.html')
     return HttpResponse(template.render())
+
+# def 
